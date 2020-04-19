@@ -18,7 +18,6 @@ const Layout = ({ children, pageName }) => {
     <>
       <Helmet bodyAttributes={{ class: className }}>
         <title>Gatsby Site</title>
-        { /* <script src='static/leaflet-providers.js' type="text/javascript" /> */ }
       </Helmet>
       <div className="wrapper">
         <Header />

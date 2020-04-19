@@ -2,7 +2,8 @@
 
   .map,
   .map-base {
-    height: 50vh;
+    height: 100vh;
+    z-index: 0;
   }
 
   main {
@@ -64,6 +65,13 @@
 
   padding-top: 4em;
   padding-bottom: 4em;
+  cursor: pointer;
+  display: block;
+  //float: right;
+  z-index: 3;
+  position: absolute; /*newly added*/
+  //right: 5px; /*newly added*/
+  top: 5px;/*newly added*/
 
   h2 {
     margin-top: 0;
@@ -77,4 +85,49 @@
     margin-bottom: 1.5em;
   }
 
+}
+
+.rowC {
+  display:flex;
+  flex-direction:row;
+}
+
+.test {
+  background-color: $dark-white;
+  border: 1px solid $grey-500;
+  text-align: left;
+  padding: 0 .5em;
+  margin-bottom: 1em;
+  border-radius: 5px;
+}
+
+.stats {
+  overflow-y: scroll;
+  height:70vh;
+  //margin-left:10px;
+  //padding: 1em;
+}
+
+.area {
+  //width: 100%;
+  border-radius: 5px;
+  border: 0.5px solid $grey-500;
+  background-color: $light-white;
+  padding: 0.5em 1em;
+  margin: 0.75em;
+}
+
+.area:hover{
+  border-color: $light-blue-900;
+  color: $light-blue-900
+}
+
+.areaTotal {
+  float: right;
+  // position: absolute;
+  // right: 0;
+}
+
+table {
+  width: 100%;
 }
