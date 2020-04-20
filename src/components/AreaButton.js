@@ -1,27 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import PropTypes from 'prop-types';
-//import 'assets/stylesheets/application.scss';
+import { MapStoreContext } from '../stores/store';
 
-const AreaButton = ({ id, title, areaTotal, lat, long, handleAreaStatsClick }) => {
+const AreaButton = ({ id, title, areaTotal, lat, long }) => {
   AreaButton.propTypes = {
     id: PropTypes.element.isRequired,
     title: PropTypes.element.isRequired,
     areaTotal: PropTypes.element.isRequired,
     lat: PropTypes.element.isRequired,
     long: PropTypes.element.isRequired,
-    handleAreaStatsClick: PropTypes.element.isRequired,
   };
 
-  // handleClick = () => {
-  //     console.log("button clicked");
-  // }
+  const mapStore = useContext( MapStoreContext );
+  const handleClick = ( lat, long ) => {
+    mapStore.lat = lat;
+    mapStore.long = long;
+  };
 
   return (
     <>
       <div className="areaDiv">
-        { /* <div id="unitedstates" class="area" tabindex="0"></div> */ }
-        { /* <div id={ id } className="area" tabIndex="0" onClick={() => handleClick(id)}> */ }
-        <div id={id} className="area" tabIndex="0" onClick={() => handleAreaStatsClick( lat, long )}>
+        <div id={id} className="area" tabIndex="0" onClick={() => handleClick( lat, long )}>
           <table className="test2">
             <tbody>
               <tr>
@@ -43,10 +42,5 @@ const AreaButton = ({ id, title, areaTotal, lat, long, handleAreaStatsClick }) =
     </>
   );
 };
-
-// Layout.propTypes = {
-//   children: PropTypes.node.isRequired,
-//   pageName: PropTypes.string,
-// };
 
 export default AreaButton;

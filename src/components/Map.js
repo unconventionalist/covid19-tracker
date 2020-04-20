@@ -1,22 +1,21 @@
-import React, { useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { Map as BaseMap, TileLayer, ZoomControl } from 'react-leaflet';
 
 import { useConfigureLeaflet, useMapServices, useRefEffect } from 'hooks';
 import { isDomAvailable } from 'lib/util';
+import { MapStoreContext } from '../stores/store';
+import { observer } from 'mobx-react';
 
 const DEFAULT_MAP_SERVICE = 'OpenStreetMap';
 
-const Map = ( props ) => {
+const Map = observer(( props ) => {
   const { children, className, defaultBaseMap = DEFAULT_MAP_SERVICE, mapEffect, ...rest } = props;
 
-  //TileLayer.provider('Stamen.Toner').addTo(Map);
-
+  const mapStore = useContext( MapStoreContext );
   const mapRef = useRef();
-  console.log( 'Mapp inner ref %o', mapRef );
 
   useConfigureLeaflet();
-
   useRefEffect({
     ref: mapRef,
     effect: mapEffect,
@@ -48,20 +47,16 @@ const Map = ( props ) => {
     ...rest,
   };
 
-  //console.log("Mapp inner ref %o", mapRef);
-  // return a function?
-  props.mapref( mapRef );
-
   return (
     <div key={props.center} className={mapClassName}>
-      <BaseMap ref={mapRef} {...mapSettings}>
+      <BaseMap ref={mapRef} {...mapSettings} center={[mapStore.lat, mapStore.long]}>
         { children }
         { basemap && <TileLayer {...basemap} /> }
         <ZoomControl position="bottomright" />
       </BaseMap>
     </div>
   );
-};
+});
 
 Map.propTypes = {
   children: PropTypes.node,

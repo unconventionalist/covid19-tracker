@@ -7,28 +7,17 @@ class AreaStats extends React.Component {
     super( props );
     this.state = {
       button_data: '',
-      //handleClick: props.handleClick
-      //    mapRef: props.mapref
     };
-    //this.handleAreaStatsClick = props.handleClick;
-    this.handleClick = this.props.handleClick;
-    //this.handleClick = this.handleClick.bind(this);
-    console.log( 'MapRef....%o', this.handleClick );
-
-    // props["mapref"].then((mapref) => {
-    //     console.log("MapRef....%o", mapref)
-    // });
 
     props['areas'].then(( data ) => {
       this.setState({
-        button_data: this.createAreasStats( data['data']['areas'], this.handleClick ),
+        button_data: this.createAreasStats( data['data']['areas']),
       });
     });
   }
 
-  createAreasStats = ( areas, handleClick ) => {
+  createAreasStats = ( areas ) => {
     let areaStats = [];
-    console.log( 'Props....%o', this.handleClick );
     areas.forEach( function ( area ) {
       areaStats.push(
         <AreaButton
@@ -38,7 +27,6 @@ class AreaStats extends React.Component {
           areaTotal={area['totalConfirmed']}
           lat={area['lat']}
           long={area['long']}
-          handleAreaStatsClick={handleClick}
         />
       );
     });
@@ -52,7 +40,6 @@ class AreaStats extends React.Component {
 
 AreaStats.propTypes = {
   areas: PropTypes.element.isRequired,
-  handleClick: PropTypes.element.isRequired,
 };
 
 export default AreaStats;

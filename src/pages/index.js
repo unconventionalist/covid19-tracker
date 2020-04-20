@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Helmet from 'react-helmet';
 import L from 'leaflet';
 import { requestCovidData } from 'lib/covid-data-service';
@@ -6,14 +6,9 @@ import { requestCovidData } from 'lib/covid-data-service';
 import Layout from 'components/Layout';
 import Container from 'components/Container';
 import Map from 'components/Map';
-//import AreaButton from 'components/AreaButton';
 import AreaStats from 'components/AreaStats';
+import { MapStoreContext } from '../stores/store';
 
-const LOCATION = {
-  lat: 0,
-  lng: 0,
-};
-const CENTER = [LOCATION.lat, LOCATION.lng];
 const DEFAULT_ZOOM = 2;
 var COVID_DATA = requestCovidData();
 
@@ -33,6 +28,8 @@ const IndexPage = () => {
    * @example Here this is and example of being used to zoom in and set a popup on load
    */
 
+  const mapStore = useContext( MapStoreContext );
+
   async function mapEffect({ leafletElement: map } = {}) {
     if ( !map ) return;
 
@@ -42,7 +39,6 @@ const IndexPage = () => {
     ]);
 
     var response = await getCovidData();
-    console.log( 'helooooooooo response %o', response );
 
     const { data = {} } = response;
     const { areas = [] } = data;
@@ -95,7 +91,6 @@ const IndexPage = () => {
         const { displayName, lastUpdated, totalConfirmed, totalDeaths, totalRecovered } = properties;
 
         let size = Math.log( totalConfirmed );
-        //        console.log("Properties...%o", properties);
 
         casesString = `${totalConfirmed}`;
 
@@ -135,40 +130,19 @@ const IndexPage = () => {
     geoJsonLayers.addTo( map );
   }
 
-  // const mapRef = useRef();
-  // console.log("ref1 %o", mapRef);
-
   var mapSettings = {
-    center: CENTER,
     defaultBaseMap: 'Stamen.Toner',
     zoom: DEFAULT_ZOOM,
-    // mapRef: mapRef,
     mapEffect,
   };
-
-  //const [mapRef, updateMapRef] = useState(0);
-
-  //var mapRef="test";
-  const getMapRef = ( data ) => {
-    //console.log("data from child map.....%o", data);
-    console.log( 'Save mapref %o', data );
-    //updateMapRef(mapRef + 1);
-    //this.setState({ mapRef: this.state.mapRef + 1 })
-    //mapRef = data;
-  };
-
-  function handleAreaStatsClick( lat, long ) {
-    console.log( 'New lat, log ' + lat + ' ' + long );
-    mapSettings.center = [lat, long];
-    console.log( 'New map settings ', mapSettings );
-  }
 
   return (
     <Layout pageName="home">
       <Helmet>
         <title>Covid-19 Tracker</title>
       </Helmet>
-      <Map {...mapSettings} key={mapSettings.center} mapref={getMapRef} />
+
+      <Map {...mapSettings} lat={mapStore.getlat()} long={mapStore.getlong()} />
 
       <Container type="content" className="text-center home-start">
         <div className="test">
@@ -179,8 +153,7 @@ const IndexPage = () => {
         <div className="test stats">
           <h3>Confirmed By Location</h3>
 
-          <AreaStats areas={requestCovidData()} handleClick={handleAreaStatsClick} />
-          { /* TODO: Clicking on any Area button should open up a new component with lower level details */ }
+          <AreaStats areas={requestCovidData()} />
         </div>
       </Container>
     </Layout>
