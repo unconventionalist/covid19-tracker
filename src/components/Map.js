@@ -42,6 +42,7 @@ const Map = observer(( props ) => {
 
   const mapSettings = {
     className: 'map-base',
+    zoom: mapStore.zoom,
     zoomControl: false,
     minZoom: 3,
     ...rest,

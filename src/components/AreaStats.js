@@ -11,7 +11,7 @@ class AreaStats extends React.Component {
 
     props['areas'].then(( data ) => {
       this.setState({
-        button_data: this.createAreasStats( data['data']['areas']),
+        button_data: this.createAreasStats( data['data']),
       });
     });
   }
@@ -21,12 +21,12 @@ class AreaStats extends React.Component {
     areas.forEach( function ( area ) {
       areaStats.push(
         <AreaButton
-          key={area['id']}
-          id={area['id']}
-          title={area['displayName']}
-          areaTotal={area['totalConfirmed']}
-          lat={area['lat']}
-          long={area['long']}
+          key={area['country']}
+          id={area['country']}
+          title={area['country']}
+          areaTotal={area['cases']}
+          lat={area['countryInfo']['lat']}
+          long={area['countryInfo']['long']}
         />
       );
     });

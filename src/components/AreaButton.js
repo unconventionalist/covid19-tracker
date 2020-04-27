@@ -12,9 +12,11 @@ const AreaButton = ({ id, title, areaTotal, lat, long }) => {
   };
 
   const mapStore = useContext( MapStoreContext );
+
   const handleClick = ( lat, long ) => {
     mapStore.lat = lat;
     mapStore.long = long;
+    mapStore.zoom = 4;
   };
 
   return (
@@ -25,13 +27,13 @@ const AreaButton = ({ id, title, areaTotal, lat, long }) => {
             <tbody>
               <tr>
                 <td>
-                  <div areaname="areaName" title="United States">
+                  <div areaname="areaName" title={title}>
                     { title }
                   </div>
                 </td>
                 <td>
                   <div areaname="areaTotal" className="areaTotal">
-                    { areaTotal }
+                    { areaTotal.toLocaleString() }
                   </div>
                 </td>
               </tr>

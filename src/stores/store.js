@@ -5,17 +5,27 @@ class MapStore {
   data = '';
   lat = 0;
   long = 0;
-  getlat = () => {
+  zoom = 2;
+  totalWorldCases = 0;
+  getLat = () => {
     return this.lat;
   };
-  getlong = () => {
+  getLong = () => {
     return this.lat;
+  };
+  getZoom = () => {
+    return this.zoom;
+  };
+  getTotalWorldCases = () => {
+    return this.totalWorldCases;
   };
 }
 
 decorate( MapStore, {
   lat: observable,
   long: observable,
+  zoom: observable,
+  totalWorldCases: observable,
 });
 
 export const MapStoreContext = createContext( new MapStore());

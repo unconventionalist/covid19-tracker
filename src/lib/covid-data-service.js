@@ -9,7 +9,27 @@ export async function requestCovidData() {
   let response;
 
   const proxyurl = 'https://cors-anywhere.herokuapp.com/';
-  const url = 'https://bing.com/covid/data'; // site that doesn’t send Access-Control-*
+  const url = 'https://corona.lmao.ninja/v2/countries'; // site that doesn’t send Access-Control-*
+
+  try {
+    response = await axios.get( proxyurl + url, {
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+      },
+    });
+    return response;
+  } catch ( e ) {
+    console.log( `Failed to fetch countries: ${e.message}`, e );
+    return;
+  }
+}
+
+export async function getWorldData() {
+  let response;
+  //const mapStore = useContext( MapStoreContext );
+
+  const proxyurl = 'https://cors-anywhere.herokuapp.com/';
+  const url = 'https://corona.lmao.ninja/v2/all'; // site that doesn’t send Access-Control-*
 
   try {
     response = await axios.get( proxyurl + url, {
