@@ -38,6 +38,8 @@ const IndexPage = () => {
   async function mapEffect({ leafletElement: map } = {}) {
     if ( !map ) return;
 
+    map.invalidateSize();
+
     map.setMaxBounds([
       [-90, -180],
       [90, 180],
