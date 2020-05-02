@@ -12,6 +12,7 @@
     "gatsby-plugin-resolve-src": "^2.0.0",
     "gatsby-plugin-sass": "^2.2.1",
     "gatsby-source-filesystem": "^2.2.2",
+    "gh-pages": "^2.2.0",
     "leaflet": "^1.6.0",
     "leaflet-providers": "^1.9.1",
     "mobx": "^5.15.4",
