@@ -6,7 +6,7 @@ const WorldStats = observer(() => {
   const mapStore = useContext( MapStoreContext );
   return (
     <div>
-      <div className="test">
+      <div className="panel">
         <h3>Total confirmed cases</h3>
         <h2>{ mapStore.totalWorldCases.toLocaleString() }</h2>
       </div>

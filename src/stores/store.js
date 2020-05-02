@@ -7,6 +7,12 @@ class MapStore {
   long = 0;
   zoom = 2;
   totalWorldCases = 0;
+  geoJsonLayers = null;
+  stats = {};
+
+  getStats = () => {
+    return this.stats;
+  };
   getLat = () => {
     return this.lat;
   };
@@ -19,6 +25,18 @@ class MapStore {
   getTotalWorldCases = () => {
     return this.totalWorldCases;
   };
+  getGeoJsonLayers = () => {
+    return this.geoJsonLayers;
+  };
+  getMapEffect = ( geoJsonLayers ) => {
+    return function mapEffect({ leafletElement: map } = {}) {
+      if ( !map ) return;
+
+      if ( geoJsonLayers ) {
+        geoJsonLayers.addTo( map );
+      }
+    };
+  };
 }
 
 decorate( MapStore, {
@@ -26,6 +44,9 @@ decorate( MapStore, {
   long: observable,
   zoom: observable,
   totalWorldCases: observable,
+  geoJsonLayer: observable,
+  getMapEffect: observable,
+  stats: observable,
 });
 
 export const MapStoreContext = createContext( new MapStore());

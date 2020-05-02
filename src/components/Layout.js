@@ -5,7 +5,6 @@ import Helmet from 'react-helmet';
 import 'assets/stylesheets/application.scss';
 
 import Header from 'components/Header';
-import Footer from 'components/Footer';
 
 const Layout = ({ children, pageName }) => {
   let className = '';
@@ -17,12 +16,11 @@ const Layout = ({ children, pageName }) => {
   return (
     <>
       <Helmet bodyAttributes={{ class: className }}>
-        <title>Gatsby Site</title>
+        <title>Covid-19 Tracker</title>
       </Helmet>
       <div className="wrapper">
         <Header />
         <main>{ children }</main>
-        <Footer />
       </div>
     </>
   );

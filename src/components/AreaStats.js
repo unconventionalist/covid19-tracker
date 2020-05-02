@@ -16,9 +16,9 @@ class AreaStats extends React.Component {
     });
   }
 
-  createAreasStats = ( areas ) => {
+  createAreasStats = ( data ) => {
     let areaStats = [];
-    areas.forEach( function ( area ) {
+    data.forEach( function ( area ) {
       areaStats.push(
         <AreaButton
           key={area['country']}
@@ -27,6 +27,10 @@ class AreaStats extends React.Component {
           areaTotal={area['cases']}
           lat={area['countryInfo']['lat']}
           long={area['countryInfo']['long']}
+          totalCases={area['cases']}
+          totalDeaths={area['deaths']}
+          totalRecovered={area['recovered']}
+          lastUpdated={area['updated']}
         />
       );
     });

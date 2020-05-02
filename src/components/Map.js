@@ -11,7 +11,6 @@ const DEFAULT_MAP_SERVICE = 'OpenStreetMap';
 
 const Map = observer(( props ) => {
   const { children, className, defaultBaseMap = DEFAULT_MAP_SERVICE, mapEffect, ...rest } = props;
-
   const mapStore = useContext( MapStoreContext );
   const mapRef = useRef();
 

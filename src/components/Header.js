@@ -1,21 +1,14 @@
 import React from 'react';
 import { Link } from 'gatsby';
 
-import Container from 'components/Container';
-
 const Header = () => {
   return (
     <header>
-      <Container type="content">
+      <div className="header">
         <Link to="/">
-          <p>COVID-19 Tracker</p>
+          <h3>COVID-19 Tracker</h3>
         </Link>
-        { /* <ul>
-          <li>
-            <Link to="/page-2/">Help</Link>
-          </li>
-        </ul> */ }
-      </Container>
+      </div>
     </header>
   );
 };

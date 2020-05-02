@@ -8,6 +8,7 @@ import Container from 'components/Container';
 import Map from 'components/Map';
 import AreaStats from 'components/AreaStats';
 import WorldStats from 'components/WorldStats';
+import LocationStats from 'components/LocationStats';
 import { MapStoreContext } from '../stores/store';
 
 var COVID_DATA = requestCovidData();
@@ -30,6 +31,8 @@ const IndexPage = () => {
   var WORLD_DATA = getWorldData();
   WORLD_DATA.then(( data ) => {
     mapStore.totalWorldCases = data['data']['cases'];
+    mapStore.stats = data['data'];
+    mapStore.stats['country'] = 'World';
   });
 
   async function mapEffect({ leafletElement: map } = {}) {
@@ -75,8 +78,6 @@ const IndexPage = () => {
         const { country, updated, cases, deaths, recovered } = properties;
 
         let size = Math.log( cases ) / 2;
-        //let size = casesPerOneMillion / 1000;
-
         casesString = `${cases}`;
 
         if ( cases > 1000 ) {
@@ -86,15 +87,14 @@ const IndexPage = () => {
         if ( updated ) {
           updatedFormatted = new Date( updated ).toLocaleString();
         }
-        //<span class="icon-marker" style="width: ${size}em; height: ${size}em">
         const html = `
           <span class="icon-marker" style="width: ${size}em; height: ${size}em">
             <span class="icon-marker-tooltip">
               <h2>${country}</h2>
               <ul>
-                <li><strong>Confirmed:</strong> ${cases}</li>
-                <li><strong>Deaths:</strong> ${deaths}</li>
-                <li><strong>Recovered:</strong> ${recovered}</li>
+                <li><strong>Confirmed:</strong> ${cases.toLocaleString()}</li>
+                <li><strong>Deaths:</strong> ${deaths.toLocaleString()}</li>
+                <li><strong>Recovered:</strong> ${recovered.toLocaleString()}</li>
                 <li><strong>Last Update:</strong> ${updatedFormatted}</li>
               </ul>
             </span>
@@ -117,7 +117,6 @@ const IndexPage = () => {
 
   var mapSettings = {
     defaultBaseMap: 'Stamen.Toner',
-    //zoom: DEFAULT_ZOOM,
     mapEffect,
   };
 
@@ -126,20 +125,18 @@ const IndexPage = () => {
       <Helmet>
         <title>Covid-19 Tracker</title>
       </Helmet>
-
       <Map {...mapSettings} lat={mapStore.getLat()} long={mapStore.getLong()} defaultZoom={mapStore.getZoom()} />
 
-      <Container type="content" className="text-center home-start" totalWorldCases={mapStore.totalWorldCases}>
-        <WorldStats totalWorldCases={mapStore.getTotalWorldCases()} />
-        { /* <div className="test">
-          <h3>Total confirmed cases</h3>
-          <h2>{mapStore.totalWorldCases}</h2>
-        </div> */ }
-
-        <div className="test stats">
-          <h3>Cases By Location</h3>
-
-          <AreaStats areas={requestCovidData()} />
+      <Container type="content">
+        <div className="text-center home-start">
+          <WorldStats />
+          <div className="panel stats">
+            <h3>Cases By Location</h3>
+            <AreaStats areas={requestCovidData()} />
+          </div>
+        </div>
+        <div className="location-stats">
+          <LocationStats lat={mapStore.getLat()} />
         </div>
       </Container>
     </Layout>

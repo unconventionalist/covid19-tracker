@@ -87,16 +87,30 @@
 
 }
 
+.location-stats {
+
+  padding-top: 5em;
+  padding-bottom: 4em;
+  padding-right: 3em;
+  cursor: pointer;
+  display: block;
+  //float: right;
+  right: 0;
+  z-index: 3;
+  position: absolute; /*newly added*/
+  top: 5px;/*newly added*/
+}
+
 .rowC {
   display:flex;
   flex-direction:row;
 }
 
-.test {
+.panel {
   background-color: $dark-white;
   border: 1px solid $grey-500;
   text-align: left;
-  padding: 0 .5em;
+  padding: 0 1em;
   margin-bottom: 1em;
   border-radius: 5px;
 }
@@ -104,12 +118,9 @@
 .stats {
   overflow-y: scroll;
   height:70vh;
-  //margin-left:10px;
-  //padding: 1em;
 }
 
 .area {
-  //width: 100%;
   border-radius: 5px;
   border: 0.5px solid $grey-500;
   background-color: $light-white;
@@ -124,8 +135,6 @@
 
 .areaTotal {
   float: right;
-  // position: absolute;
-  // right: 0;
 }
 
 table {

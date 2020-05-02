@@ -8,11 +8,11 @@ import axios from 'axios';
 export async function requestCovidData() {
   let response;
 
-  const proxyurl = 'https://cors-anywhere.herokuapp.com/';
+  //const proxyurl = 'https://cors-anywhere.herokuapp.com/';
   const url = 'https://corona.lmao.ninja/v2/countries'; // site that doesn’t send Access-Control-*
 
   try {
-    response = await axios.get( proxyurl + url, {
+    response = await axios.get( url, {
       headers: {
         'Access-Control-Allow-Origin': '*',
       },
@@ -26,13 +26,12 @@ export async function requestCovidData() {
 
 export async function getWorldData() {
   let response;
-  //const mapStore = useContext( MapStoreContext );
 
-  const proxyurl = 'https://cors-anywhere.herokuapp.com/';
+  //const proxyurl = 'https://cors-anywhere.herokuapp.com/';
   const url = 'https://corona.lmao.ninja/v2/all'; // site that doesn’t send Access-Control-*
 
   try {
-    response = await axios.get( proxyurl + url, {
+    response = await axios.get( url, {
       headers: {
         'Access-Control-Allow-Origin': '*',
       },
@@ -43,12 +42,3 @@ export async function getWorldData() {
     return;
   }
 }
-
-// export async function getCovidData() {
-//     if(!COVID_DATA){
-//         console.log("covid_data does not exist...");
-//         COVID_DATA = await requestCovidData();
-//     }
-//     console.log("Returning covid data ...%o", COVID_DATA);
-//     return COVID_DATA;
-// }
