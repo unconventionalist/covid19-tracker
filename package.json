@@ -1,8 +1,8 @@
 {
-  "name": "gatsby-starter-leaflet",
-  "description": "A Gatsby starter with Leafet!",
-  "version": "0.2.4",
-  "author": "Colby Fayock <hello@colbyfayock.com>",
+  "name": "covid19-tracker",
+  "description": "A covid 19 tracker application",
+  "version": "1.0.0",
+  "author": "Pranta Alam",
   "dependencies": {
     "@babel/plugin-proposal-decorators": "^7.8.3",
     "axios": "^0.19.2",
