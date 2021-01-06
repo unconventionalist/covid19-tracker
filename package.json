@@ -6,7 +6,7 @@
   "homepage": "http://unconventionalist.github.io/covid19-tracker",
   "dependencies": {
     "@babel/plugin-proposal-decorators": "^7.8.3",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "babel-plugin-styled-components": "^1.10.7",
     "gatsby": "^2.20.12",
     "gatsby-plugin-react-helmet": "^3.2.1",
